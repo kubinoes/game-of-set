@@ -11,8 +11,11 @@ struct Oval: Shape {
     func path(in rect: CGRect) -> Path {
         var p = Path()
         
-        let topY = rect.height * 0.37
-        let bottomY = rect.height * 0.63
+        // we base height from width, since there can be 1-3 shapes on the card, we have fixed hight that will be 1:2 aspect ratio to width
+        let height = rect.width / 2
+        
+        let topY = rect.midY - height / 2
+        let bottomY = rect.midY + height / 2
         let leftX = rect.width * 0.25
         let rightX = rect.width * 0.75
         

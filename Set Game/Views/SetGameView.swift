@@ -24,8 +24,9 @@ struct CardView: View {
                     shape.fill().foregroundColor(.white)
                     shape.strokeBorder(lineWidth: 3)
                     VStack {
-                        Diamond().padding().foregroundColor(.blue)
-                        Diamond().padding().foregroundColor(.blue)
+                        Squiggle().padding().foregroundColor(.blue)
+                        //Squiggle().padding().foregroundColor(.blue)
+                        //Squiggle().padding().foregroundColor(.blue)
                     }
                 } else {
                     shape.fill().foregroundColor(.black)
