@@ -8,29 +8,24 @@
 import SwiftUI
 
 struct SetGameView: View {
-    var body: some View {
-        CardView().padding()
-    }
-}
-
-struct CardView: View {
-    var isFaceUp = true
+    @ObservedObject var game: SetGameClassic
     
     var body: some View {
-        GeometryReader { geomtry in
-            ZStack {
-                let shape = RoundedRectangle(cornerRadius: 10)
-                if isFaceUp {
-                    shape.fill().foregroundColor(.white)
-                    shape.strokeBorder(lineWidth: 3)
-                    VStack {
-                        Squiggle().padding().foregroundColor(.blue)
-                        //Squiggle().padding().foregroundColor(.blue)
-                        //Squiggle().padding().foregroundColor(.blue)
+        VStack {
+            AspectVGrid(items: game.model.cardsOnBoard, aspectRatio: 2/3) { card in
+                CardView(color: game.getColor(of: card), shape: game.getShape(of: card), number: game.getNumberOfSymbols(of: card), shading: game.getShading(of: card), isSelected: card.isSelected)
+                    .onTapGesture {
+                        game.choose(card)
                     }
-                } else {
-                    shape.fill().foregroundColor(.black)
-                }
+            }
+            HStack {
+                Button("Deal 3 more cards") {
+                    game.dealCards()
+                }.padding().disabled(game.model.deck.count == 0)
+                Spacer()
+                Button("New Game") {
+                    game.newGame()
+                }.padding()
             }
         }
     }
@@ -38,11 +33,9 @@ struct CardView: View {
 
 
 
-
-
-
 struct SetGameView_Previews: PreviewProvider {
     static var previews: some View {
-        SetGameView()
+        let game = SetGameClassic()
+        return SetGameView(game: game)
     }
 }

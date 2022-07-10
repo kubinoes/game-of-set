@@ -23,6 +23,7 @@ struct Diamond: Shape {
         p.addLine(to: point2)
         p.addLine(to: point3)
         p.addLine(to: point4)
+        p.addLine(to: point1)
         
         return p
     }
