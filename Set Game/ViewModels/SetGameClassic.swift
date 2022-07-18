@@ -32,7 +32,7 @@ class SetGameClassic: ObservableObject {
         model.choose(card)
     }
     
-    // MARK: Symbol helpers
+    // MARK: Symbol translators
     func getColor(of card: SetGame.Card) -> Color {
         return colors[card.color.value - 1]
     }

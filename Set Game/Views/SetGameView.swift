@@ -13,7 +13,7 @@ struct SetGameView: View {
     var body: some View {
         VStack {
             AspectVGrid(items: game.model.cardsOnBoard, aspectRatio: 2/3) { card in
-                CardView(color: game.getColor(of: card), shape: game.getShape(of: card), number: game.getNumberOfSymbols(of: card), shading: game.getShading(of: card), isSelected: card.isSelected)
+                CardView(card: card, game: game)
                     .onTapGesture {
                         game.choose(card)
                     }
@@ -37,5 +37,6 @@ struct SetGameView_Previews: PreviewProvider {
     static var previews: some View {
         let game = SetGameClassic()
         return SetGameView(game: game)
+            .previewInterfaceOrientation(.portrait)
     }
 }

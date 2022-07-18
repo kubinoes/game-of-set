@@ -8,34 +8,31 @@
 import SwiftUI
 
 struct CardView: View {
-    var color: Color
-    var shape: String
-    var number: Int
-    var shading: Double
-    var isSelected: Bool
-    
-    init(color: Color, shape: String, number: Int, shading: Double, isSelected: Bool) {
-        self.color = color
-        self.shape = shape
-        self.number = number
-        self.shading = shading
-        self.isSelected = isSelected
-    }
+    var card: SetGame.Card
+    var game: SetGameClassic
     
     var body: some View {
         GeometryReader { geometry in
             ZStack {
                 let rectangle = RoundedRectangle(cornerRadius: 10)
                 rectangle.fill().foregroundColor(.white)
-                if isSelected {
+                
+                if card.isSelected {
                     rectangle.strokeBorder(lineWidth: 3).foregroundColor(.green)
+                } else if card.isMismatched {
+                    rectangle.foregroundColor(.red).opacity(0.5)
+                } else if card.isMatched {
+                    rectangle.foregroundColor(.green).opacity(0.5)
                 } else {
                     rectangle.strokeBorder(lineWidth: 3)
                 }
                 VStack {
                     Spacer()
-                    ForEach(Range(1...number), id: \.self) { _ in
+                    ForEach(Range(1...game.getNumberOfSymbols(of: card)), id: \.self) { _ in
                         ZStack {
+                            let shape = game.getShape(of: card)
+                            let color = game.getColor(of: card)
+                            let shading = game.getShading(of: card)
                             if shape == "diamond" {
                                 Diamond().foregroundColor(color).opacity(shading)
                                 Diamond().stroke(color, lineWidth: 2)
