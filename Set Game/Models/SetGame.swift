@@ -104,7 +104,7 @@ struct SetGame {
                     cardsOnBoard[index].isSelected = false
                 }
                 // if the current match are last cards on the board, remove them and leave the board empty
-                if cardsOnBoard.count <= 3 && deck.count == 0 {
+                if cardsOnBoard.count <= 3 && deck.isEmpty {
                     cardsOnBoard.removeAll()
                 }
             } else {
@@ -125,8 +125,7 @@ struct SetGame {
     // MARK: Helper functions
     
     private func isMatch(card1: Card, card2: Card, card3: Card) -> Bool {
-        //return isFeatureMatch(card1Feature: card1.shape, card2Feature: card2.shape, card3Feature: card3.shape) && isFeatureMatch(card1Feature: card1.color, card2Feature: card2.color, card3Feature: card3.color) && isFeatureMatch(card1Feature: card1.shading, card2Feature: card2.shading, card3Feature: card3.shading) && isFeatureMatch(card1Feature: card1.number, card2Feature: card2.number, card3Feature: card3.number)
-        return true
+        return isFeatureMatch(card1Feature: card1.shape, card2Feature: card2.shape, card3Feature: card3.shape) && isFeatureMatch(card1Feature: card1.color, card2Feature: card2.color, card3Feature: card3.color) && isFeatureMatch(card1Feature: card1.shading, card2Feature: card2.shading, card3Feature: card3.shading) && isFeatureMatch(card1Feature: card1.number, card2Feature: card2.number, card3Feature: card3.number)
     }
     
     private func isFeatureMatch(card1Feature: SetOptions, card2Feature: SetOptions, card3Feature: SetOptions) -> Bool {

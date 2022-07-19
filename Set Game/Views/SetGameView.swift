@@ -12,12 +12,18 @@ struct SetGameView: View {
     
     var body: some View {
         VStack {
-            AspectVGrid(items: game.model.cardsOnBoard, aspectRatio: 2/3) { card in
-                CardView(card: card, game: game)
-                    .onTapGesture {
-                        game.choose(card)
-                    }
+            if !game.model.cardsOnBoard.isEmpty {
+                AspectVGrid(items: game.model.cardsOnBoard, aspectRatio: 2/3) { card in
+                    CardView(card: card, game: game)
+                        .onTapGesture {
+                            game.choose(card)
+                        }
+                }
+            } else {
+                Spacer()
+                Text("Congrats, you have won the game of set!")
             }
+            Spacer()
             HStack {
                 Button("Deal 3 more cards") {
                     game.dealCards()
